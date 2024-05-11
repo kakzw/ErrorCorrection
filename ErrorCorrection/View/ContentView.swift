@@ -62,11 +62,14 @@ struct SimulationToggleButton: View {
   var body: some View {
     HStack {
       Spacer()
-        .frame(maxWidth: .infinity)
-      Toggle("Auto Simulation", isOn: $autoSimulate)
+      Text("Auto Simulation")
+        .bold()
+        .opacity(0.8)
+      Toggle("", isOn: $autoSimulate)
         .padding(EdgeInsets())
         .bold()
         .opacity(0.8)
+        .frame(width: 50)
     }
     .padding()
   }
@@ -102,9 +105,9 @@ struct AutoSimulationView: View {
       
       // if statement to update view when input is updated
       if inputUpdated {
-        ResultView(normalSimulation: false)
+        ResultView(autoSimulate: true)
       } else {
-        ResultView(normalSimulation: false)
+        ResultView(autoSimulate: true)
       }
     }
   }
@@ -173,7 +176,7 @@ struct NormalSimulationView: View {
         .frame(height: 10)
     }
     .navigationDestination(isPresented: $sendTapped) {
-      ResultView(normalSimulation: true)
+      ResultView(autoSimulate: false)
     }
     .padding()
   }

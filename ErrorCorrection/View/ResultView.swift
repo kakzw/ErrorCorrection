@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ResultView: View {
-  var normalSimulation: Bool
+  var autoSimulate: Bool
   
   var body: some View {
     List(Results.allCases, id: \.self) { result in
       // when used for auto simulation,
       // don't display original messasge and error pattern
-      if normalSimulation || (result != .originalMessage && result != .errorPattern) {
+      if !autoSimulate || (result != .originalMessage && result != .errorPattern) {
         ResultViewCell(result: result)
       }
     }
     .listStyle(.plain)
     .padding(.horizontal)
-    .navigationTitle("Result")
+    .navigationTitle(autoSimulate ? "Error Correction" : "Result")
     .navigationBarTitleDisplayMode(.inline)
     .toolbarBackground(.orange, for: .navigationBar)
     .toolbarBackground(.visible, for: .navigationBar)
@@ -48,5 +48,5 @@ struct ResultViewCell: View {
 }
 
 #Preview {
-  ResultView(normalSimulation: false)
+  ResultView(autoSimulate: false)
 }
